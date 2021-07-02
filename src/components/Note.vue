@@ -32,7 +32,6 @@
 <script>
 import {path} from "@/config";
 import {Request} from "@/config";
-// import axios from "axios";
 
 export default {
   name: "Note",
@@ -64,19 +63,6 @@ export default {
         new_note_text: this.editedNoteText,
       }
       Request.putRequest(path.put, data)
-      // axios
-      //     .post('http://127.0.0.1:5000/edit',
-      //         {
-      //           note_id: noteId,
-      //           new_note_title: this.editedNoteTitle,
-      //           new_note_text: this.editedNoteText,
-      //         })
-      //     .then(() => {
-      //       console.log("UPDATE")
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     })
       this.edited = false;
     },
     deleteNote(noteId) {
@@ -84,18 +70,6 @@ export default {
         note_id: noteId,
       }
       Request.deleteRequest(path.delete, data)
-      // console.log(noteId)
-      // axios
-      //     .post('http://127.0.0.1:5000/delete',
-      //         {
-      //           note_id: noteId,
-      //         })
-      //     .then(() => {
-      //       console.log("DELETE")
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     })
     }
   },
 }

@@ -11,9 +11,8 @@
 
 <script>
 import Note from "./Note";
-import axios from "axios";
 import {path} from "@/config";
-// import {Request} from "@/config";
+import {Request} from "@/config";
 
 export default {
   name: "NotesList",
@@ -27,19 +26,10 @@ export default {
     }
   },
   methods: {
-    getNotes() {
-      axios
-          .get(path.get)
-          .then( (res) => {
-            this.notes = res.data
-          })
-          .catch( (err) => {
-            console.log(err)
-          })
-      console.log("GET")
-      // this.notes = Request.getRequest(path.get);
-      // console.log("\nNotes")
-      // console.log(this.notes)
+    async getNotes() {
+      this.notes = await Request.getRequest(path.get);
+      console.log("\nNotes")
+      console.log(this.notes)
     }
   },
   async mounted() {
