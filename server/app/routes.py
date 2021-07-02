@@ -14,6 +14,7 @@ def show_notes():
             'title': note.note_title,
             'text': note.note_text
         })
+    print("\nResponse:")
     print(res)
     return jsonify(res)
 
@@ -32,9 +33,9 @@ def create_note():
     return 'Something went wrong'
 
 
-@app.route('/delete', methods=['GET', 'POST'])
+@app.route('/delete', methods=['GET', 'DELETE'])
 def delete_note():
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         payload = request.get_json()
         print(payload)
         deleted_note = Notes.query.get(payload.get('note_id'))
@@ -46,11 +47,13 @@ def delete_note():
     return 'Something went wrong'
 
 
-@app.route('/edit', methods=['GET', 'POST'])
+@app.route('/edit', methods=['GET', 'PUT'])
 def edit_note():
-    if request.method == 'POST':
+    if request.method == 'PUT':
         payload = request.get_json()
+        print("\nPAYLOAD\n")
         print(payload)
+        print("\n")
         edited_note = Notes.query.get(payload.get('note_id'))
         print(edited_note)
 

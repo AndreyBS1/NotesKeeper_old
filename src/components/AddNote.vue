@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import {path} from "@/config";
+import {Request} from "@/config";
 
 export default {
   name: "AddNote",
@@ -29,18 +30,11 @@ export default {
   }),
   methods: {
     addNote() {
-      axios
-          .post('http://127.0.0.1:5000/create',
-              {
-                note_title: this.new_note_title,
-                note_text: this.new_note_text,
-              })
-          .then(() => {
-            console.log("POST")
-          })
-          .catch((err) => {
-            console.log(err);
-          })
+      let data = {
+        note_title: this.new_note_title,
+        note_text: this.new_note_text,
+      }
+      Request.postRequest(path.post, data);
     }
   },
 }
