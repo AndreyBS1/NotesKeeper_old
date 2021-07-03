@@ -1,19 +1,21 @@
 <template>
   <div>
-    <form v-on:submit.prevent="addNote">
+    <form @submit.prevent="addNote">
       <h3>Note title:</h3>
       <input
-          v-model="new_note_title"
+          v-model.trim="new_note_title"
           placeholder="Enter note title"
       >
 
       <h3>Note text:</h3>
       <input
-          v-model="new_note_text"
+          v-model.trim="new_note_text"
           placeholder="Enter note text"
       >
 
-      <button type="submit">Submit</button>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   </div>
 </template>
@@ -21,6 +23,7 @@
 <script>
 import {path} from "@/config";
 import {Request} from "@/config";
+// import Modal from "@/components/Modal";
 
 export default {
   name: "AddNote",
@@ -35,6 +38,7 @@ export default {
         note_text: this.new_note_text,
       }
       Request.postRequest(path.post, data);
+      this.$emit('close');
     }
   },
 }

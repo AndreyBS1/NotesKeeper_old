@@ -5,12 +5,12 @@
       <p>{{ note.text }}</p>
       <p>{{ note.id }}</p>
 
-      <button v-on:click="editButton(note)">Edit</button>
-      <button v-on:click="deleteNote(note.id)">Delete</button>
+      <button @click="editButton(note)">Edit</button>
+      <button @click="deleteNote(note.id)">Delete</button>
     </div>
 
     <div v-show="edited">
-      <form v-on:submit.prevent="editNote(note.id)">
+      <form @submit.prevent="editNote(note.id)">
         <h3>Note title:</h3>
         <input
             v-model="editedNoteTitle"

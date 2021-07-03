@@ -16,14 +16,14 @@
           </slot>
         </div>
 
-        <div class="modal-footer">
-          <slot name="footer">
-            default footer
-            <button class="modal-default-button" @click="$emit('close')">
-              OK
-            </button>
-          </slot>
-        </div>
+<!--        <div class="modal-footer">-->
+<!--          <slot name="footer">-->
+<!--            default footer-->
+<!--            <button class="modal-default-button" @click="$emit('close')">-->
+<!--              <slot name="modal-button">OK</slot>-->
+<!--            </button>-->
+<!--          </slot>-->
+<!--        </div>-->
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@ export default {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
-}
+/*.modal-default-button {*/
+/*  float: right;*/
+/*}*/
 </style>

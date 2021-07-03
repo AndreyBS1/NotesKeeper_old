@@ -1,13 +1,19 @@
 <template>
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <button id="show-modal" @click="showModal = true">
+    Create Note
+  </button>
+
   <modal v-if="showModal" @close="showModal = false">
     <template v-slot:header>
-      <h3>custom header</h3>
+      <h3>Create note</h3>
+    </template>
+    <template v-slot:body>
+      <AddNote @close="showModal = false"/>
     </template>
   </modal>
 
   <NotesList/>
-  <AddNote/>
+<!--  <AddNote/>-->
 </template>
 
 <script>
