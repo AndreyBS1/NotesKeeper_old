@@ -3,13 +3,13 @@
     <form @submit.prevent="addNote">
       <h3>Note title:</h3>
       <input
-          v-model.trim="new_note_title"
+          v-model.trim="createdNoteTitle"
           placeholder="Enter note title"
       >
 
       <h3>Note text:</h3>
       <input
-          v-model.trim="new_note_text"
+          v-model.trim="createdNoteText"
           placeholder="Enter note text"
       >
 
@@ -23,23 +23,31 @@
 <script>
 import {path} from "@/config";
 import {Request} from "@/config";
-// import Modal from "@/components/Modal";
 
 export default {
-  name: "AddNote",
-  data: () => ({
-    new_note_title: null,
-    new_note_text: null,
-  }),
+  name: "CreateNote",
+
+  data() {
+    return {
+      createdNoteTitle: null,
+      createdNoteText: null,
+    }
+  },
+
   methods: {
     addNote() {
       let data = {
-        note_title: this.new_note_title,
-        note_text: this.new_note_text,
+        note_title: this.createdNoteTitle,
+        note_text: this.createdNoteText,
+      };
+
+      if (data.note_title === null && data.note_text === null) {
+        alert("Enter title or text!")
+      } else {
+        Request.postRequest(path.post, data);
+        this.$emit('close');
       }
-      Request.postRequest(path.post, data);
-      this.$emit('close');
-    }
+    },
   },
 }
 </script>

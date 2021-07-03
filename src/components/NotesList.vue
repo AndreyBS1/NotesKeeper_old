@@ -16,15 +16,18 @@ import {Request} from "@/config";
 
 export default {
   name: "NotesList",
+
   components: {
     Note
   },
+
   data() {
     return {
       loading: true,
       notes: [],
     }
   },
+
   methods: {
     async getNotes() {
       this.notes = await Request.getRequest(path.get);
@@ -32,8 +35,9 @@ export default {
       console.log(this.notes)
     }
   },
+
   async mounted() {
-    await this.getNotes()
+    await this.getNotes();
   },
 }
 </script>

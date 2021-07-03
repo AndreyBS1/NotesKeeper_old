@@ -1,24 +1,23 @@
 <template>
-  <button id="show-modal" @click="showModal = true">
+  <button id="show-create-modal" @click="showCreateModal = true">
     Create Note
   </button>
 
-  <modal v-if="showModal" @close="showModal = false">
+  <modal v-if="showCreateModal">
     <template v-slot:header>
       <h3>Create note</h3>
     </template>
     <template v-slot:body>
-      <AddNote @close="showModal = false"/>
+      <CreateNote @close="showCreateModal = false"/>
     </template>
   </modal>
 
   <NotesList/>
-<!--  <AddNote/>-->
 </template>
 
 <script>
 import NotesList from "@/components/NotesList";
-import AddNote from "@/components/AddNote";
+import CreateNote from "@/components/Modals/CreateNote";
 import Modal from "@/components/Modal";
 
 export default {
@@ -26,11 +25,11 @@ export default {
   components: {
     Modal,
     NotesList,
-    AddNote
+    CreateNote,
   },
   data() {
     return {
-      showModal: false,
+      showCreateModal: false,
     }
   }
 }
