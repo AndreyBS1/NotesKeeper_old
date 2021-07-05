@@ -15,39 +15,41 @@ export class Request {
             .catch( (err) => {
                 console.log(err);
             })
-        console.log("GET")
-        console.log("Response");
+        console.log(`\nGET\nResponse:`)
         console.log(response.data);
         return response.data;
     }
 
-    static postRequest(path, data) {
-        axios
+    static async postRequest(path, data) {
+        await axios
             .post(path, data)
             .then( () => {
-                console.log("POST")
+                console.log("\nPOST\nRequest:");
+                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
 
-    static putRequest(path, data) {
-        axios
+    static async putRequest(path, data) {
+        await axios
             .put(path, data)
             .then( () => {
-                console.log("PUT")
+                console.log("\nPUT\nRequest:");
+                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
 
-    static deleteRequest(path, data) {
-        axios
+    static async deleteRequest(path, data) {
+        await axios
             .delete(path, { data: data })
             .then( () => {
-                console.log("DELETE")
+                console.log("\nDELETE\nRequest:");
+                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
