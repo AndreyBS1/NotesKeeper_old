@@ -34,8 +34,8 @@
       <template v-slot:body>
         <EditNote
             :note="note"
-            @close="showEditModal = false"
-            @update="$emit('update')"
+            @close-edit-modal="showEditModal = false"
+            @edited-note="$emit('update')"
         />
       </template>
     </modal>
@@ -47,8 +47,8 @@
       <template v-slot:body>
         <DeleteNote
             :note="note"
-            @close="showDeleteModal = false"
-            @update="$emit('update')"
+            @close-delete-modal="showDeleteModal = false"
+            @deleted-note="$emit('update')"
         />
       </template>
     </modal>
@@ -61,6 +61,8 @@ import DeleteNote from "@/components/Modals/DeleteNote";
 
 export default {
   name: "Note",
+
+  emits: ['update'],
 
   components: {
     Modal,

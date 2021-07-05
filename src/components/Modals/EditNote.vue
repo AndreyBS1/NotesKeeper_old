@@ -26,6 +26,8 @@ import {path, Request} from "@/config";
 export default {
   name: "EditNote",
 
+  emits: ['closeEditModal', 'editedNote'],
+
   props: {
     note: {
       type: Object,
@@ -44,15 +46,15 @@ export default {
   },
 
   methods: {
-    editNote() {
+    async editNote() {
       let data = {
         note_id: this.editedNoteId,
         new_note_title: this.editedNoteTitle,
         new_note_text: this.editedNoteText,
       };
-      Request.putRequest(path.put, data);
-      this.$emit('close');
-      this.$emit('update');
+      await Request.putRequest(path.put, data);
+      this.$emit('closeEditModal');
+      this.$emit('editedNote');
     },
   }
 }

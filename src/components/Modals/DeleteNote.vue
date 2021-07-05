@@ -15,6 +15,8 @@ import {path, Request} from "@/config";
 export default {
   name: "DeleteNote",
 
+  emits: ['closeDeleteModal', 'deletedNote'],
+
   props: {
     note: {
       type: Object,
@@ -25,13 +27,13 @@ export default {
   },
 
   methods: {
-    deleteNote() {
+    async deleteNote() {
       let data = {
         note_id: this.note.id,
       };
-      Request.deleteRequest(path.delete, data);
-      this.$emit('close');
-      this.$emit('update');
+      await Request.deleteRequest(path.delete, data);
+      this.$emit('closeDeleteModal');
+      this.$emit('deletedNote');
     },
   }
 }

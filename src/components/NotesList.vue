@@ -7,25 +7,44 @@
         @update="getNotes"
     />
   </div>
+  <div>
+    <button id="show-create-modal" @click="showCreateModal = true">
+      Create Note
+    </button>
+
+    <modal v-if="showCreateModal">
+      <template v-slot:header>
+        <h3>Create note</h3>
+      </template>
+      <template v-slot:body>
+        <CreateNote
+            @close-create-modal="showCreateModal = false"
+            @created-note="getNotes"
+        />
+      </template>
+    </modal>
+  </div>
 </template>
 
 <script>
 import Note from "./Note";
 import {path} from "@/config";
 import {Request} from "@/config";
+import CreateNote from "@/components/Modals/CreateNote";
+import Modal from "@/components/Modal";
 
 export default {
   name: "NotesList",
 
-  // mixins: [mixin]
-
   components: {
-    Note
+    Note,
+    CreateNote,
+    Modal,
   },
 
   data() {
     return {
-      loading: true,
+      showCreateModal: false,
       notes: [],
     }
   },
@@ -33,8 +52,8 @@ export default {
   methods: {
     async getNotes() {
       this.notes = await Request.getRequest(path.get);
-      console.log("\nNotes")
-      console.log(this.notes)
+      console.log("Displayed data:");
+      console.log(this.notes);
     }
   },
 

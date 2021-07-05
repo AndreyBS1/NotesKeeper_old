@@ -15,6 +15,7 @@
 
       <div>
         <button type="submit">Submit</button>
+        <button type="reset" @click="$emit('closeCreateModal')">Cancel</button>
       </div>
     </form>
   </div>
@@ -27,6 +28,8 @@ import {Request} from "@/config";
 export default {
   name: "CreateNote",
 
+  emits: ['closeCreateModal', 'createdNote'],
+
   data() {
     return {
       createdNoteTitle: null,
@@ -35,16 +38,17 @@ export default {
   },
 
   methods: {
-    addNote() {
+    async addNote() {
       if (this.createdNoteTitle === null && this.createdNoteText === null) {
-        alert("Enter title or text!")
+        await alert("Enter title or text!")
       } else {
         let data = {
           note_title: this.createdNoteTitle,
           note_text: this.createdNoteText,
         };
-        Request.postRequest(path.post, data);
-        this.$emit('close');
+        await Request.postRequest(path.post, data);
+        this.$emit('closeCreateModal');
+        this.$emit('createdNote');
       }
     },
   },
