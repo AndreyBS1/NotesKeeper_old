@@ -4,8 +4,8 @@
         v-for="note in notes"
         :note="note"
         :key='note.id'
-    >
-    </Note>
+        @update="getNotes"
+    />
   </div>
 </template>
 
@@ -16,6 +16,8 @@ import {Request} from "@/config";
 
 export default {
   name: "NotesList",
+
+  // mixins: [mixin]
 
   components: {
     Note

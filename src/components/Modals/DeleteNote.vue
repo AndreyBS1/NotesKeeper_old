@@ -31,6 +31,7 @@ export default {
       };
       Request.deleteRequest(path.delete, data);
       this.$emit('close');
+      this.$emit('update');
     },
   }
 }

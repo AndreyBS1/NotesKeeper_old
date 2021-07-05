@@ -7,10 +7,11 @@
     </div>
 
     <div class="note-card-buttons">
-      <button id="show-read-modal" @click="showReadModal = true">Read</button>
-      <button id="show-edit-modal" @click="showEditModal = true">Edit</button>
-      <button id="show-delete-note" @click="showDeleteModal = true">Delete</button>
+      <button class="show-read-modal" @click="showReadModal = true">Read</button>
+      <button class="show-edit-modal" @click="showEditModal = true">Edit</button>
+      <button class="show-delete-note" @click="showDeleteModal = true">Delete</button>
     </div>
+  </div>
 
     <modal v-if="showReadModal">
       <template v-slot:header>
@@ -31,7 +32,11 @@
         <h3>Edit note</h3>
       </template>
       <template v-slot:body>
-        <EditNote :note="note" @close="showEditModal = false"/>
+        <EditNote
+            :note="note"
+            @close="showEditModal = false"
+            @update="$emit('update')"
+        />
       </template>
     </modal>
 
@@ -40,32 +45,16 @@
         <h3>Delete note</h3>
       </template>
       <template v-slot:body>
-        <DeleteNote :note="note" @close="showDeleteModal = false"/>
+        <DeleteNote
+            :note="note"
+            @close="showDeleteModal = false"
+            @update="$emit('update')"
+        />
       </template>
     </modal>
-<!--    <div v-show="edited">-->
-<!--      <form @submit.prevent="editNote(note.id)">-->
-<!--        <h3>Note title:</h3>-->
-<!--        <input-->
-<!--            v-model="editedNoteTitle"-->
-<!--            placeholder="Enter note title"-->
-<!--        >-->
-
-<!--        <h3>Note text:</h3>-->
-<!--        <input-->
-<!--            v-model="editedNoteText"-->
-<!--            placeholder="Enter note text"-->
-<!--        >-->
-
-<!--        <button type="submit">Submit</button>-->
-<!--      </form>-->
-<!--    </div>-->
-  </div>
 </template>
 
 <script>
-// import {path} from "@/config";
-// import {Request} from "@/config";
 import Modal from "@/components/Modal";
 import EditNote from "@/components/Modals/EditNote";
 import DeleteNote from "@/components/Modals/DeleteNote";
@@ -93,46 +82,62 @@ export default {
       showReadModal: false,
       showEditModal: false,
       showDeleteModal: false,
-      // edited: false,
-      // editedNoteTitle: null,
-      // editedNoteText: null,
-
     }
   },
-
-  // methods: {
-  //   editButton(note) {
-  //     this.edited = true;
-  //     this.editedNoteTitle = note.title;
-  //     this.editedNoteText = note.text;
-  //   },
-  //
-  //   editNote(noteId) {
-  //     let data = {
-  //       note_id: noteId,
-  //       new_note_title: this.editedNoteTitle,
-  //       new_note_text: this.editedNoteText,
-  //     }
-  //     Request.putRequest(path.put, data)
-  //     this.edited = false;
-  //   },
-  //
-  //   deleteNote(noteId) {
-  //     let data = {
-  //       note_id: noteId,
-  //     }
-  //     Request.deleteRequest(path.delete, data)
-  //   },
-  // },
 }
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
 .note-card {
-  margin: 1%;
-  min-width: 15vw;
-  max-width: 20vw;
-  min-height: 30vh;
-  max-height: 40vh;
+  width: 300px;
+  text-align: center;
+  margin: 0 auto;
+  border: 2px solid #F5F5F5;
+  background: white;
+  transition: .2s ease-in;
+}
+
+.note-card:hover {
+  border: 2px solid #9370DB;
+}
+
+.note-card-body{
+  height: 200px;
+}
+
+.note-card-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+button {
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 12px;
+  padding: 0 12px;
+  background: white;
+  border: 2px solid #F5F5F5;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 28px;
+  transition: .2s ease-in;
+}
+
+.show-read-modal:hover {
+  border: 2px solid #4169E1;
+}
+
+.show-edit-modal:hover {
+  border: 2px solid #808080;
+}
+
+.show-delete-note:hover {
+  border: 2px solid #fc5a5a;
 }
 </style>

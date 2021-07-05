@@ -36,14 +36,13 @@ export default {
 
   methods: {
     addNote() {
-      let data = {
-        note_title: this.createdNoteTitle,
-        note_text: this.createdNoteText,
-      };
-
-      if (data.note_title === null && data.note_text === null) {
+      if (this.createdNoteTitle === null && this.createdNoteText === null) {
         alert("Enter title or text!")
       } else {
+        let data = {
+          note_title: this.createdNoteTitle,
+          note_text: this.createdNoteText,
+        };
         Request.postRequest(path.post, data);
         this.$emit('close');
       }

@@ -52,6 +52,7 @@ export default {
       };
       Request.putRequest(path.put, data);
       this.$emit('close');
+      this.$emit('update');
     },
   }
 }
